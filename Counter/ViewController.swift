@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     private let incrementButtonTag = 1
     private let decrementButtonTag = 2
@@ -20,16 +20,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+        setupUI()
     }
     
-    @IBOutlet weak var counterLabel: UILabel!
-    @IBOutlet weak var decrementButton: UIButton!
-    @IBOutlet weak var incrementButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var changeHistoryTextView: UITextView!
+    @IBOutlet weak private var counterLabel: UILabel!
+    @IBOutlet weak private var decrementButton: UIButton!
+    @IBOutlet weak private var incrementButton: UIButton!
+    @IBOutlet weak private var resetButton: UIButton!
+    @IBOutlet weak private var changeHistoryTextView: UITextView!
     
-    private func updateUI() {
+    private func setupUI() {
         
         changeHistoryTextView.text = "История изменений:\n"
         incrementButton.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
@@ -67,18 +67,18 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func resetButtonTap(_ sender: UIButton) {
+    @IBAction private func resetButtonTap(_ sender: UIButton) {
         counter = 0
         counterLabel.text = "Значение счётчика: \(counter)"
         changeState(button: sender)
     }
     
-    @IBAction func counterButtonTap(_ sender: UIButton) {
+    @IBAction private func counterButtonTap(_ sender: UIButton) {
         changeState(button: sender)
     }
 }
 
-extension UITextView {
+private extension UITextView {
     func append(_ string : String) {
         let endOfDocument = self.endOfDocument
         if let atEnd = self.textRange(from: endOfDocument, to: endOfDocument) {
